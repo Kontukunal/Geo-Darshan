@@ -5,6 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import LandingPage from "./pages/LandingPage";
+import Recommendations from "./pages/Recommendations";
+import DestinationDetails from "./pages/DestinationDetails";
 
 function App() {
   return (
@@ -20,6 +22,23 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/recommendations"
+        element={
+          <ProtectedRoute>
+            <Recommendations />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/destination/:id"
+        element={
+          <ProtectedRoute>
+            <DestinationDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   );
 }

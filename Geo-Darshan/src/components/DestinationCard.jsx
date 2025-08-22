@@ -16,17 +16,14 @@ const DestinationCard = ({
   compact = false,
 }) => {
   const dispatch = useDispatch();
-  // Add fallback for undefined favorites
-  const favorites = useSelector((state) => state.destination?.favorites || []);
-  // Add fallback for undefined comparisonList
+  const favorites = useSelector((state) => state.destination.favorites || []);
   const comparisonList = useSelector(
-    (state) => state.destination?.comparisonList || []
+    (state) => state.destination.comparisonList || []
   );
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Add optional chaining to prevent errors
-  const isFavorite = favorites?.includes(destination.id) || false;
-  const isInComparison = comparisonList?.includes(destination.id) || false;
+  const isFavorite = favorites.includes(destination.id);
+  const isInComparison = comparisonList.includes(destination.id);
 
   const handleFavoriteToggle = async (e) => {
     e.preventDefault();
@@ -50,7 +47,7 @@ const DestinationCard = ({
 
   const handleAddToComparison = (e) => {
     e.preventDefault();
-    if (!isInComparison && comparisonList?.length < 3) {
+    if (!isInComparison && comparisonList.length < 3) {
       dispatch(addToComparison(destination.id));
     }
   };
@@ -92,11 +89,11 @@ const DestinationCard = ({
           {showCompareButton && (
             <button
               onClick={handleAddToComparison}
-              disabled={isInComparison || comparisonList?.length >= 3}
+              disabled={isInComparison || comparisonList.length >= 3}
               className={`p-1.5 rounded-full backdrop-blur-sm transition-all duration-200 ${
                 isInComparison
                   ? "bg-green-500 text-white"
-                  : comparisonList?.length >= 3
+                  : comparisonList.length >= 3
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-white/80 text-gray-700 hover:bg-white hover:text-blue-500"
               }`}
