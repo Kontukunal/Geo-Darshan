@@ -16,7 +16,6 @@ import { destinations } from "../data/destinations";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {
-  Filter,
   Search,
   MapPin,
   Sliders,
@@ -30,6 +29,7 @@ import {
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { Link, useNavigate } from "react-router-dom";
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: new URL(
@@ -41,7 +41,26 @@ L.Icon.Default.mergeOptions({
     .href,
 });
 
-// New DestinationCard component with the same styling as Favourites page
+const COMPARE_STORAGE_KEY = "destinationComparisonList";
+
+const getStoredComparisonList = () => {
+  try {
+    const stored = localStorage.getItem(COMPARE_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error("Error reading comparison list from localStorage:", error);
+    return [];
+  }
+};
+
+const saveComparisonList = (list) => {
+  try {
+    localStorage.setItem(COMPARE_STORAGE_KEY, JSON.stringify(list));
+  } catch (error) {
+    console.error("Error saving comparison list to localStorage:", error);
+  }
+};
+
 const DestinationCard = ({
   destination,
   showCompareButton = false,
@@ -156,7 +175,6 @@ const DestinationCard = ({
         </div>
       </div>
 
-      {/* Favorite button */}
       <div className="absolute top-6 left-6 z-20 group-hover:scale-110 transition-transform">
         <button
           onClick={handleFavoriteClick}
@@ -170,7 +188,6 @@ const DestinationCard = ({
         </button>
       </div>
 
-      {/* Compare button - positioned below the favorite button */}
       {showCompareButton && (
         <div className="absolute top-20 left-6 z-20 group-hover:scale-110 transition-transform">
           <button
@@ -195,6 +212,7 @@ const DestinationCard = ({
 
 const Recommendations = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const preferences = useSelector((state) => state.preference.preferences);
   const recommendations = useSelector(
     (state) => state.destination.recommendations
@@ -209,7 +227,7 @@ const Recommendations = () => {
   });
 
   const [favorites, setFavorites] = useState([]);
-  const [compareList, setCompareList] = useState([]);
+  const [compareList, setCompareList] = useState(getStoredComparisonList());
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -222,14 +240,12 @@ const Recommendations = () => {
         if (snap.exists()) {
           const data = snap.data();
 
-          // Load preferences if not already in Redux
           if (!preferences && data.preferences) {
             dispatch(setPreferences(data.preferences));
             const recs = getRecommendations(destinations, data.preferences);
             dispatch(setRecommendations(recs));
           }
 
-          // Load favorites
           if (data.favorites) {
             setFavorites(data.favorites);
           }
@@ -243,10 +259,20 @@ const Recommendations = () => {
     loadPrefsAndFavorites();
   }, [preferences, dispatch]);
 
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === COMPARE_STORAGE_KEY) {
+        setCompareList(getStoredComparisonList());
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   const toggleFavorite = async (destinationId) => {
     const user = auth.currentUser;
     if (!user) {
-      // Redirect to login or show a message
       return;
     }
 
@@ -254,13 +280,11 @@ const Recommendations = () => {
       const userRef = doc(db, "users", user.uid);
 
       if (favorites.includes(destinationId)) {
-        // Remove from favorites
         await updateDoc(userRef, {
           favorites: arrayRemove(destinationId),
         });
         setFavorites((prev) => prev.filter((id) => id !== destinationId));
       } else {
-        // Add to favorites
         await updateDoc(userRef, {
           favorites: arrayUnion(destinationId),
         });
@@ -272,16 +296,31 @@ const Recommendations = () => {
   };
 
   const toggleCompare = (destinationId) => {
+    let newCompareList;
+    const destination = destinations.find((d) => d.id === destinationId);
+
     if (compareList.includes(destinationId)) {
-      setCompareList((prev) => prev.filter((id) => id !== destinationId));
+      newCompareList = compareList.filter((id) => id !== destinationId);
     } else {
-      if (compareList.length < 3) {
-        setCompareList((prev) => [...prev, destinationId]);
-      } else {
-        // Show a message that only 3 destinations can be compared
-        alert("You can compare up to 3 destinations only.");
+      if (compareList.length >= 3) {
+        alert(`You can compare up to 3 destinations only. 
+Please remove one from your comparison list first.`);
+        return;
       }
+      newCompareList = [...compareList, destinationId];
     }
+
+    setCompareList(newCompareList);
+    saveComparisonList(newCompareList);
+  };
+
+  const handleClearCompare = () => {
+    setCompareList([]);
+    saveComparisonList([]);
+  };
+
+  const handleCompareNow = () => {
+    navigate("/comparision");
   };
 
   const filteredRecommendations = useMemo(() => {
@@ -322,9 +361,7 @@ const Recommendations = () => {
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Updated Heading */}
         <div className="text-center mb-12">
-          
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">
               Personalized Recommendations
@@ -335,7 +372,7 @@ const Recommendations = () => {
           </p>
         </div>
 
-        {/* Compare Bar */}
+        
         {compareList.length > 0 && (
           <div className="bg-white rounded-2xl shadow-sm p-4 mb-6 border border-gray-100 flex justify-between items-center">
             <div>
@@ -345,18 +382,13 @@ const Recommendations = () => {
             </div>
             <div className="flex space-x-2">
               <button
-                onClick={() => {
-                  // Navigate to comparison page
-                  window.location.href = `/compare?ids=${compareList.join(
-                    ","
-                  )}`;
-                }}
+                onClick={handleCompareNow}
                 className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
               >
                 Compare Now
               </button>
               <button
-                onClick={() => setCompareList([])}
+                onClick={handleClearCompare}
                 className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
               >
                 Clear All
@@ -365,7 +397,6 @@ const Recommendations = () => {
           </div>
         )}
 
-        {/* Updated Search + Filters */}
         <div className="bg-white rounded-2xl shadow-sm p-6 mb-8 border border-gray-100 hover:shadow-md transition-shadow">
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-1">
@@ -399,7 +430,6 @@ const Recommendations = () => {
           {showFilters && (
             <div className="mt-6 pt-6 border-t border-gray-200">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Budget Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Budget Range
@@ -419,7 +449,6 @@ const Recommendations = () => {
                   </select>
                 </div>
 
-                {/* Rating Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Minimum Rating
@@ -438,7 +467,6 @@ const Recommendations = () => {
                   </select>
                 </div>
 
-                {/* Tags Filter */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Interests
@@ -469,7 +497,6 @@ const Recommendations = () => {
           )}
         </div>
 
-        {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-gray-600">
             Showing {filteredRecommendations.length} destinations
@@ -532,7 +559,6 @@ const Recommendations = () => {
           </div>
         )}
 
-        {/* Map */}
         <div className="mt-12">
           <h3 className="text-2xl font-semibold text-gray-700 mb-4">
             Explore on Map
