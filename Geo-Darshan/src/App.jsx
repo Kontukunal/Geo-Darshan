@@ -20,6 +20,7 @@ import LandingPage from "./pages/LandingPage";
 import Recommendations from "./pages/Recommendations";
 import DestinationDetails from "./pages/DestinationDetails";
 import Survey from "./pages/Survey";
+import Favourites from "./pages/Favourites";
 
 function App() {
   const dispatch = useDispatch();
@@ -92,6 +93,14 @@ function App() {
         element={
           <ProtectedRoute>
             <DestinationDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/favourites"
+        element={
+          <ProtectedRoute>
+            <Favourites />
           </ProtectedRoute>
         }
       />
