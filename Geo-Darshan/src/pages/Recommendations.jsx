@@ -25,11 +25,63 @@ import {
   X,
   Check,
   Plus,
+  Palette,
 } from "lucide-react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Link, useNavigate } from "react-router-dom";
+
+// Custom marker icons with different colors
+const createCustomIcon = (color, emoji) => {
+  return L.divIcon({
+    html: `
+      <div style="
+        background: linear-gradient(135deg, ${color}, ${color}00);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+      ">
+        <div style="
+          background: white;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        ">
+          ${emoji}
+        </div>
+      </div>
+    `,
+    className: "custom-marker",
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+};
+
+// Color and emoji combinations for markers
+const markerStyles = [
+  { color: "#3B82F6", emoji: "🏖️" }, // Beach - Blue
+  { color: "#10B981", emoji: "🏔️" }, // Mountain - Green
+  { color: "#F59E0B", emoji: "🏛️" }, // Cultural - Amber
+  { color: "#EF4444", emoji: "🌋" }, // Adventure - Red
+  { color: "#8B5CF6", emoji: "🌃" }, // City - Purple
+  { color: "#EC4899", emoji: "🏝️" }, // Island - Pink
+  { color: "#14B8A6", emoji: "🏜️" }, // Desert - Teal
+  { color: "#F97316", emoji: "❄️" }, // Snow - Orange
+];
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: new URL(
@@ -372,7 +424,6 @@ Please remove one from your comparison list first.`);
           </p>
         </div>
 
-        
         {compareList.length > 0 && (
           <div className="bg-white rounded-2xl shadow-sm p-4 mb-6 border border-gray-100 flex justify-between items-center">
             <div>
@@ -559,37 +610,123 @@ Please remove one from your comparison list first.`);
           </div>
         )}
 
-        <div className="mt-12">
-          <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-            Explore on Map
-          </h3>
+        {/* Enhanced Map Section */}
+        <div className="mt-12 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-xl overflow-hidden border border-cyan-200 p-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">
+                  Explore on Map
+                </span>
+              </h3>
+              <p className="text-gray-600">
+                Discover your recommended destinations visually
+              </p>
+            </div>
+          </div>
+
           <MapContainer
             center={[20, 0]}
             zoom={2}
-            scrollWheelZoom={false}
+            scrollWheelZoom={true}
             style={{
               height: "500px",
               width: "100%",
               borderRadius: "1rem",
+              border: "2px solid rgba(6, 182, 212, 0.3)",
+              boxShadow: "0 10px 25px -5px rgba(6, 182, 212, 0.2)",
             }}
           >
+            {/* Cool blue-themed map tiles */}
             <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
             />
-            {filteredRecommendations.map((dest) => (
-              <Marker
-                key={dest.id}
-                position={[dest.coordinates.lat, dest.coordinates.lng]}
-              >
-                <Popup>
-                  <div>
-                    <strong>{dest.name}</strong> <br />
-                    {dest.country} <br />⭐ {dest.rating} ({dest.reviewCount})
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
+
+            {/* Water color enhancement */}
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+              opacity={0.3}
+            />
+
+            {filteredRecommendations.map((dest, index) => {
+              const style = markerStyles[index % markerStyles.length];
+              return (
+                <Marker
+                  key={dest.id}
+                  position={[dest.coordinates.lat, dest.coordinates.lng]}
+                  icon={createCustomIcon(style.color, style.emoji)}
+                >
+                  <Popup className="custom-popup rounded-xl border-0 shadow-2xl">
+                    <div className="w-80 p-0 overflow-hidden">
+                      {/* Popup Image */}
+                      <div className="relative">
+                        <img
+                          src={dest.image}
+                          alt={dest.name}
+                          className="w-full h-48 object-cover"
+                        />
+                        <div className="absolute top-3 right-3">
+                          <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors">
+                            <Heart className="w-4 h-4 text-gray-600 hover:text-red-500" />
+                          </button>
+                        </div>
+                        <div className="absolute bottom-3 left-3">
+                          <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            #{index + 1}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Popup Content */}
+                      <div className="p-4">
+                        <div className="flex items-start justify-between mb-3">
+                          <div>
+                            <h3 className="font-bold text-gray-900 text-lg">
+                              {dest.name}
+                            </h3>
+                            <p className="text-gray-600 text-sm flex items-center">
+                              <MapPin className="w-4 h-4 mr-1 text-cyan-600" />
+                              {dest.country}
+                            </p>
+                          </div>
+                          <div className="flex items-center space-x-1 bg-cyan-50 px-2 py-1 rounded-lg">
+                            <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                            <span className="text-sm font-semibold text-cyan-800">
+                              {dest.rating}
+                            </span>
+                          </div>
+                        </div>
+
+                        <p className="text-gray-700 text-sm mb-4 line-clamp-2">
+                          {dest.description}
+                        </p>
+
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="text-2xl font-bold text-cyan-600">
+                            ${dest.price}
+                            <span className="text-gray-500 text-sm ml-1">
+                              /person
+                            </span>
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            {dest.reviewCount} reviews
+                          </div>
+                        </div>
+
+                        <Link
+                          to={`/destination/${dest.id}`}
+                          className="block w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-center py-3 rounded-xl font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all transform hover:scale-105"
+                        >
+                          Explore Destination
+                        </Link>
+                      </div>
+                    </div>
+                  </Popup>
+                </Marker>
+              );
+            })}
           </MapContainer>
         </div>
       </div>

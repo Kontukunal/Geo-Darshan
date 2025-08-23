@@ -89,7 +89,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="navbar-container">
+    <div className="navbar-container ">
       <CardNav
         items={navLinks}
         buttonLabel="Logout"

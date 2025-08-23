@@ -22,6 +22,7 @@ import DestinationDetails from "./pages/DestinationDetails";
 import Survey from "./pages/Survey";
 import Favourites from "./pages/Favourites";
 import Comparison from "./pages/Comparision";
+import Trending from "./pages/Trending";
 
 function App() {
   const dispatch = useDispatch();
@@ -110,6 +111,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Comparison />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/trending"
+        element={
+          <ProtectedRoute>
+            <Trending />
           </ProtectedRoute>
         }
       />
