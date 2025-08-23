@@ -21,6 +21,7 @@ import Recommendations from "./pages/Recommendations";
 import DestinationDetails from "./pages/DestinationDetails";
 import Survey from "./pages/Survey";
 import Favourites from "./pages/Favourites";
+import Comparison from "./pages/Comparision";
 
 function App() {
   const dispatch = useDispatch();
@@ -101,6 +102,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Favourites />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/comparision"
+        element={
+          <ProtectedRoute>
+            <Comparison />
           </ProtectedRoute>
         }
       />
