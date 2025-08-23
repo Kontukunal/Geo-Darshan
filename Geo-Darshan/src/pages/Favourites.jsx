@@ -80,7 +80,6 @@ const ChromaGrid = ({
       onPointerLeave={handleLeave}
       className={`relative w-full h-full flex flex-wrap justify-center items-start gap-8 ${className}`}
       style={{
-        
         "--r": `${radius}px`,
         "--x": "50%",
         "--y": "50%",
@@ -292,7 +291,7 @@ const Favourites = () => {
               exploring and save your dream destinations for later!
             </p>
             <a
-              href="/destinations"
+              href="/recommendations"
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-blue-700 shadow-blue-200 hover:shadow-blue-300 hover:shadow-lg transition-all duration-300"
             >
               Explore Destinations

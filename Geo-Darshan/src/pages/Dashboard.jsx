@@ -8,6 +8,58 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { Star, MapPin, Heart, Navigation, Palette } from "lucide-react";
+
+// Custom marker icons with different colors
+const createCustomIcon = (color, emoji) => {
+  return L.divIcon({
+    html: `
+      <div style="
+        background: linear-gradient(135deg, ${color}, ${color}00);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+      ">
+        <div style="
+          background: white;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        ">
+          ${emoji}
+        </div>
+      </div>
+    `,
+    className: "custom-marker",
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+};
+
+// Color and emoji combinations for markers
+const markerStyles = [
+  { color: "#3B82F6", emoji: "🏖️" }, // Beach - Blue
+  { color: "#10B981", emoji: "🏔️" }, // Mountain - Green
+  { color: "#F59E0B", emoji: "🏛️" }, // Cultural - Amber
+  { color: "#EF4444", emoji: "🌋" }, // Adventure - Red
+  { color: "#8B5CF6", emoji: "🌃" }, // City - Purple
+  { color: "#EC4899", emoji: "🏝️" }, // Island - Pink
+  { color: "#14B8A6", emoji: "🏜️" }, // Desert - Teal
+  { color: "#F97316", emoji: "❄️" }, // Snow - Orange
+];
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: new URL(
@@ -50,8 +102,22 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-pink-50">
       <Navbar />
 
+      {/* Hero Image at the top */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
+          <img
+            src="https://images.pexels.com/photos/10618962/pexels-photo-10618962.jpeg"
+            alt="Relaxing beach destination"
+            className="w-full h-64 md:h-96 object-cover rounded-2xl"
+          />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
+        </div>
+      </div>
+
+      {/* Hero Text Section */}
       <div className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 md:pb-14">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Discover Your Next Adventure
@@ -65,7 +131,8 @@ const Dashboard = () => {
                 to="/recommendations"
                 className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-full shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105"
               >
-                🎯 Get Personalized Recommendations
+                <Navigation className="w-5 h-5 mr-2" />
+                Get Personalized Recommendations
                 <svg
                   className="ml-2 -mr-1 w-5 h-5"
                   fill="currentColor"
@@ -93,8 +160,10 @@ const Dashboard = () => {
         {/* Destinations Slider */}
         <section className="relative">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-3">
-              ✨ Featured Destinations
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
+                Featured Destinations
+              </span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Handpicked locations loved by travelers worldwide
@@ -117,29 +186,21 @@ const Dashboard = () => {
                 </motion.div>
               ))}
             </div>
-
-            {/* Scroll indicators */}
-            <div className="flex justify-center mt-4 space-x-2">
-              {validDestinations.map((_, index) => (
-                <div
-                  key={index}
-                  className="w-2 h-2 rounded-full bg-gray-300"
-                ></div>
-              ))}
-            </div>
           </div>
         </section>
 
-        {/* Map  */}
-        <section className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+        <section className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-xl overflow-hidden border border-cyan-200">
           <div className="p-8 pb-6">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  🗺 Explore Map
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-600">
+                    Explore Our World
+                  </span>
                 </h2>
-                <p className="text-gray-600">
-                  Explore destinations visually and plan your journey
+                <p className="text-gray-600 text-lg">
+                  Discover amazing destinations across the globe with our
+                  interactive map
                 </p>
               </div>
             </div>
@@ -153,40 +214,99 @@ const Dashboard = () => {
               style={{
                 height: "500px",
                 width: "100%",
-                borderRadius: "0.5rem",
-                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                borderRadius: "1rem",
+                border: "2px solid rgba(6, 182, 212, 0.3)",
+                boxShadow: "0 10px 25px -5px rgba(6, 182, 212, 0.2)",
               }}
             >
               <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
               />
 
-              {validDestinations.map((dest) => (
-                <Marker
-                  key={dest.id}
-                  position={[dest.coordinates.lat, dest.coordinates.lng]}
-                >
-                  <Popup className="rounded-lg shadow-lg">
-                    <div className="p-2">
-                      <h3 className="font-bold text-gray-900">{dest.name}</h3>
-                      <p className="text-gray-600 text-sm">{dest.country}</p>
-                      <div className="flex items-center mt-1">
-                        <span className="text-yellow-500">⭐</span>
-                        <span className="ml-1 text-sm font-medium text-gray-700">
-                          {dest.rating} ({dest.reviewCount})
-                        </span>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+                opacity={0.3}
+              />
+
+              {validDestinations.map((dest, index) => {
+                const style = markerStyles[index % markerStyles.length];
+                return (
+                  <Marker
+                    key={dest.id}
+                    position={[dest.coordinates.lat, dest.coordinates.lng]}
+                    icon={createCustomIcon(style.color, style.emoji)}
+                  >
+                    <Popup className="custom-popup rounded-xl border-0 shadow-2xl">
+                      <div className="w-80 p-0 overflow-hidden">
+                        {/* Popup Image */}
+                        <div className="relative">
+                          <img
+                            src={dest.image}
+                            alt={dest.name}
+                            className="w-full h-48 object-cover"
+                          />
+                          <div className="absolute top-3 right-3">
+                            <button className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors">
+                              <Heart className="w-4 h-4 text-gray-600 hover:text-red-500" />
+                            </button>
+                          </div>
+                          <div className="absolute bottom-3 left-3">
+                            <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                              #{index + 1}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Popup Content */}
+                        <div className="p-4">
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <h3 className="font-bold text-gray-900 text-lg">
+                                {dest.name}
+                              </h3>
+                              <p className="text-gray-600 text-sm flex items-center">
+                                <MapPin className="w-4 h-4 mr-1 text-cyan-600" />
+                                {dest.country}
+                              </p>
+                            </div>
+                            <div className="flex items-center space-x-1 bg-cyan-50 px-2 py-1 rounded-lg">
+                              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                              <span className="text-sm font-semibold text-cyan-800">
+                                {dest.rating}
+                              </span>
+                            </div>
+                          </div>
+
+                          <p className="text-gray-700 text-sm mb-4 line-clamp-2">
+                            {dest.description}
+                          </p>
+
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="text-2xl font-bold text-cyan-600">
+                              ${dest.price}
+                              <span className="text-gray-500 text-sm ml-1">
+                                /person
+                              </span>
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {dest.reviewCount} reviews
+                            </div>
+                          </div>
+
+                          <Link
+                            to={`/destination/${dest.id}`}
+                            className="block w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-center py-3 rounded-xl font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all transform hover:scale-105"
+                          >
+                            Explore Destination
+                          </Link>
+                        </div>
                       </div>
-                      <Link
-                        to={`/destination/${dest.id}`}
-                        className="mt-2 inline-block text-sm text-blue-600 hover:text-blue-800 font-medium"
-                      >
-                        View details →
-                      </Link>
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
+                    </Popup>
+                  </Marker>
+                );
+              })}
             </MapContainer>
           </div>
         </section>
