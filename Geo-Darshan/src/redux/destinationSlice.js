@@ -102,9 +102,9 @@ export const {
   setFavorites,
   setTrending,
   addToItinerary,
-    removeFromItinerary,
-    clearItinerary,
-    setComparisonList,
-    setItineraryList,
-  } = destinationSlice.actions;
-  export default destinationSlice.reducer;
+  removeFromItinerary,
+  clearItinerary,
+  setComparisonList,
+  setItineraryList,
+} = destinationSlice.actions;
+export default destinationSlice.reducer;
