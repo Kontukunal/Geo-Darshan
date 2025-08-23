@@ -5,6 +5,7 @@ import { destinations } from "../data/destinations";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import DestinationCard from "../components/DestinationCard";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -190,6 +191,8 @@ const Dashboard = () => {
           </div>
         </section>
       </div>
+
+      <Footer />
     </div>
   );
 };
