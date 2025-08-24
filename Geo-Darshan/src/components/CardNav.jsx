@@ -15,7 +15,7 @@ const CardNav = ({
   buttonTextColor,
   buttonLabel = "Get Started",
   onButtonClick,
-  buttonClass = "", // Add buttonClass prop
+  buttonClass = "",
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -25,7 +25,7 @@ const CardNav = ({
 
   const calculateHeight = () => {
     const navEl = navRef.current;
-    if (!navEl) return 60; // Default height when collapsed
+    if (!navEl) return 60;
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     if (isMobile) {
@@ -55,7 +55,7 @@ const CardNav = ({
         return topBar + contentHeight + padding;
       }
     }
-    return 260; // Expanded height for desktop
+    return 260;
   };
 
   const createTimeline = () => {
@@ -170,11 +170,11 @@ const CardNav = ({
             type="button"
             className={`card-nav-cta-button ${
               isLogoutButton ? "logout-button" : ""
-            } ${buttonClass}`} // Add buttonClass here
+            } ${buttonClass}`}
             style={{
               backgroundColor: buttonBgColor,
               color: buttonTextColor,
-              // Remove inline styles if buttonClass is provided
+
               ...(buttonClass
                 ? { backgroundColor: "transparent", color: "white" }
                 : {}),

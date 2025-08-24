@@ -2,37 +2,15 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-8 px-4">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <div className="mb-4 md:mb-0">
-            <span className="font-bold text-xl text-blue-400">GeoDarshan</span>
-          </div>
-          <nav className="flex flex-wrap justify-center gap-4 md:gap-6 mb-4 md:mb-0">
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              About
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              Contact
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              Case Studies
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              Blog
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-colors">
-              Privacy
-            </a>
-          </nav>
-        </div>
+    <footer className="bg-gradient-to-r from-blue-600 to-purple-600 text-white flex flex-col items-center justify-center p-8 rounded-none">
+      <div className="flex flex-col items-center text-center">
+        <span className="font-black text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none tracking-tighter mb-2">
+          Geo Darshan
+        </span>
 
-        <div className="border-t border-gray-700 pt-6 text-center">
-          <p className="text-sm text-gray-400 mb-2">
-            All Right Reserved, All Wrong Reversed.
-          </p>
-          <p className="text-sm text-gray-400">Proudly created in India.</p>
-        </div>
+        <hr className="my-2 w-2/3 md:w-1/2 lg:w-1/3 border-t-2 border-white opacity-50" />
+
+        <p className="text-white text-sm mt-2">Developed by Kunal Mali</p>
       </div>
     </footer>
   );
