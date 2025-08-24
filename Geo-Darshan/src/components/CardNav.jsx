@@ -15,6 +15,7 @@ const CardNav = ({
   buttonTextColor,
   buttonLabel = "Get Started",
   onButtonClick,
+  buttonClass = "", // Add buttonClass prop
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -160,7 +161,7 @@ const CardNav = ({
 
           <div className="logo-container">
             <Link to="/dashboard" className="brand-logo">
-              <span className="geo-text">Geo</span>
+              <span className="geo-text gradient-text">Geo</span>
               <span className="darshan-text">Darshan</span>
             </Link>
           </div>
@@ -169,8 +170,15 @@ const CardNav = ({
             type="button"
             className={`card-nav-cta-button ${
               isLogoutButton ? "logout-button" : ""
-            }`}
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+            } ${buttonClass}`} // Add buttonClass here
+            style={{
+              backgroundColor: buttonBgColor,
+              color: buttonTextColor,
+              // Remove inline styles if buttonClass is provided
+              ...(buttonClass
+                ? { backgroundColor: "transparent", color: "white" }
+                : {}),
+            }}
             onClick={onButtonClick}
           >
             {isLogoutButton && <LogOut className="w-4 h-4" />}
