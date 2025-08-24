@@ -178,7 +178,7 @@ const Survey = () => {
         );
 
         dispatch(setPreferences(preferences));
-        navigate("/dashboard");
+        navigate("/recommendations");
       } else {
         alert("User not logged in");
       }

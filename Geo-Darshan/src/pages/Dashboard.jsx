@@ -49,16 +49,15 @@ const createCustomIcon = (color, emoji) => {
   });
 };
 
-// Color and emoji combinations for markers
 const markerStyles = [
-  { color: "#3B82F6", emoji: "🏖️" }, // Beach - Blue
-  { color: "#10B981", emoji: "🏔️" }, // Mountain - Green
-  { color: "#F59E0B", emoji: "🏛️" }, // Cultural - Amber
-  { color: "#EF4444", emoji: "🌋" }, // Adventure - Red
-  { color: "#8B5CF6", emoji: "🌃" }, // City - Purple
-  { color: "#EC4899", emoji: "🏝️" }, // Island - Pink
-  { color: "#14B8A6", emoji: "🏜️" }, // Desert - Teal
-  { color: "#F97316", emoji: "❄️" }, // Snow - Orange
+  { color: "#3B82F6", emoji: "🏖️" },
+  { color: "#10B981", emoji: "🏔️" },
+  { color: "#F59E0B", emoji: "🏛️" },
+  { color: "#EF4444", emoji: "🌋" },
+  { color: "#8B5CF6", emoji: "🌃" },
+  { color: "#EC4899", emoji: "🏝️" },
+  { color: "#14B8A6", emoji: "🏜️" },
+  { color: "#F97316", emoji: "❄️" },
 ];
 
 L.Icon.Default.mergeOptions({
@@ -110,8 +109,6 @@ const Dashboard = () => {
             alt="Relaxing beach destination"
             className="w-full h-64 md:h-96 object-cover rounded-2xl"
           />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
         </div>
       </div>
 
