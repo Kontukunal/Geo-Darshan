@@ -7,7 +7,6 @@
   height: 60px;
   z-index: 1000;
   transition: height 0.4s ease;
-  
 }
 
 .navbar-container.expanded {
@@ -110,10 +109,14 @@
   letter-spacing: -0.5px;
 }
 
-.geo-text {
+/* Gradient styling for Geo text */
+.geo-text.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 900;
   font-size: 1.6rem;
-  color: #3b82f6;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -332,7 +335,7 @@
     font-size: 1.3rem;
   }
 
-  .geo-text {
+  .geo-text.gradient-text {
     font-size: 1.4rem;
   }
 
@@ -374,7 +377,7 @@
   transform: scale(1.05);
 }
 
-.brand-logo:hover .geo-text {
+.brand-logo:hover .geo-text.gradient-text {
   display: inline-block;
   animation: pulse 1s ease;
 }
