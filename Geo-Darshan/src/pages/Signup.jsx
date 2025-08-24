@@ -3,10 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { MapPin, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  User,
+  Eye,
+  EyeOff,
+  Sparkles,
+  Globe,
+  Compass,
+  Mountain,
+} from "lucide-react";
+import { motion } from "framer-motion";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -69,204 +81,309 @@ const Signup = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-white flex flex-col lg:flex-row overflow-hidden">
-      {/* Left side - Image (on top for mobile, on left for desktop) */}
-      <div className="w-full lg:w-1/2 h-1/3 lg:h-full relative order-1 lg:order-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#fe6427]/10 to-[#fde325]/10"></div>
-        <img
-          src="https://images.unsplash.com/photo-1601823984263-b87b59798b70?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Travel"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute bottom-4 left-4 lg:bottom-10 lg:left-10 text-white max-w-md">
-          <h3 className="text-xl lg:text-2xl font-bold mb-2">
-            Begin Your Journey
-          </h3>
-          <p className="text-white/90 text-sm lg:text-base">
-            Sign up to unlock personalized travel experiences around the world.
-          </p>
-        </div>
-      </div>
-
-      {/* Right side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-6 lg:py-8 order-0 lg:order-1 overflow-y-auto">
-        <div className="max-w-md w-full space-y-6 lg:space-y-8">
-          <div className="text-center">
-            <Link
-              to="/"
-              className="flex items-center justify-center space-x-2 mb-4 lg:mb-6"
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-pink-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row rounded-3xl overflow-hidden shadow-2xl bg-white">
+        {/* Left side - Form */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-8 md:p-12 lg:p-16">
+          <div className="w-full max-w-md space-y-8">
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-[#04d5f2] to-[#43ee17] rounded-lg flex items-center justify-center shadow-md">
-                <MapPin className="w-4 h-4 lg:w-6 lg:h-6 text-white" />
-              </div>
-              <span className="text-xl lg:text-2xl font-bold text-[#050404]">
-                Geo Darshan
-              </span>
-            </Link>
-            <h2 className="text-2xl lg:text-3xl font-bold text-[#050404] mb-2">
-              Create your account
-            </h2>
-            <p className="text-[#6b7280] text-sm lg:text-base">
-              Start your personalized travel journey today
-            </p>
+              <Link to="/" className="inline-flex justify-center mb-6 group">
+                <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-500">
+                  Geo Darshan
+                </h1>
+              </Link>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                Create Account
+              </h2>
+              <p className="text-gray-600">
+                Start your personalized travel journey today
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="bg-white rounded-2xl p-8 border border-gray-100 shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {error && (
+                  <motion.div
+                    className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    {error}
+                  </motion.div>
+                )}
+
+                {/* Email Input */}
+                <motion.div
+                  className="space-y-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Mail className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="block w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-300"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Password Input */}
+                <motion.div
+                  className="space-y-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                >
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Password
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Lock className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      id="password"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      required
+                      value={formData.password}
+                      onChange={handleChange}
+                      className="block w-full pl-10 pr-10 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-300"
+                      placeholder="Create a password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-blue-600 transition-colors duration-300"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </motion.div>
+
+                {/* Confirm Password Input */}
+                <motion.div
+                  className="space-y-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Confirm Password
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Lock className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type={showConfirmPassword ? "text" : "password"}
+                      required
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      className="block w-full pl-10 pr-10 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-300"
+                      placeholder="Confirm your password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-blue-600 transition-colors duration-300"
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </motion.div>
+
+                {/* Terms and Conditions */}
+                <motion.div
+                  className="flex items-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                >
+                  <input
+                    id="terms"
+                    name="terms"
+                    type="checkbox"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    required
+                  />
+                  <label
+                    htmlFor="terms"
+                    className="ml-2 block text-sm text-gray-700"
+                  >
+                    I agree to the{" "}
+                    <Link
+                      to="/terms"
+                      className="text-blue-600 hover:text-purple-600 transition-colors duration-300"
+                    >
+                      Terms and Conditions
+                    </Link>
+                  </label>
+                </motion.div>
+
+                {/* Submit Button */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                >
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed shadow-md flex items-center justify-center"
+                  >
+                    {loading ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        Creating account...
+                      </>
+                    ) : (
+                      "Create Account"
+                    )}
+                  </button>
+                </motion.div>
+              </form>
+
+              <motion.div
+                className="mt-6 text-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+              >
+                <p className="text-gray-600">
+                  Already have an account?{" "}
+                  <Link
+                    to="/login"
+                    className="font-medium text-blue-600 hover:text-purple-600 transition-colors duration-300"
+                  >
+                    Sign in here
+                  </Link>
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Right side - Image & Content */}
+        <div className="hidden lg:block w-1/2 relative bg-gradient-to-br from-blue-600 to-purple-600">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl opacity-20"></div>
+            <div className="absolute bottom-10 right-10 w-72 h-72 bg-pink-400 rounded-full blur-3xl opacity-20"></div>
           </div>
 
-          <div className="bg-white rounded-xl lg:rounded-2xl shadow-lg p-6 lg:p-8 border border-[#f1f5f9]">
-            <form onSubmit={handleSubmit} className="space-y-4 lg:space-y-6">
-              {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 lg:px-4 lg:py-3 rounded-lg text-xs lg:text-sm">
-                  {error}
-                </div>
-              )}
-
-              {/* Email Input */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-xs lg:text-sm font-medium text-[#050404] mb-1 lg:mb-2"
-                >
-                  Email Address
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-4 w-4 lg:h-5 lg:w-5 text-[#d4d8dd]" />
-                  </div>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="block w-full pl-9 lg:pl-10 pr-3 py-2 lg:py-3 border border-[#e2e8f0] rounded-lg focus:ring-2 focus:ring-[#04d5f2] focus:border-transparent transition-colors duration-300 text-sm lg:text-base"
-                    placeholder="Enter your email"
-                  />
+          <div className="relative z-10 h-full flex flex-col justify-center items-center text-center p-12 text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-md"
+            >
+              <div className="flex justify-center mb-6">
+                <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/20">
+                  <Sparkles className="w-10 h-10 text-white" />
                 </div>
               </div>
 
-              {/* Password Input */}
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-xs lg:text-sm font-medium text-[#050404] mb-1 lg:mb-2"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 lg:h-5 lg:w-5 text-[#d4d8dd]" />
-                  </div>
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    required
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="block w-full pl-9 lg:pl-10 pr-9 lg:pr-10 py-2 lg:py-3 border border-[#e2e8f0] rounded-lg focus:ring-2 focus:ring-[#04d5f2] focus:border-transparent transition-colors duration-300 text-sm lg:text-base"
-                    placeholder="Create a password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#d4d8dd] hover:text-[#04d5f2] transition-colors duration-300"
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4 lg:h-5 lg:w-5" />
-                    ) : (
-                      <Eye className="h-4 w-4 lg:h-5 lg:w-5" />
-                    )}
-                  </button>
-                </div>
-              </div>
+              <h2 className="text-3xl font-bold mb-4">Begin Your Journey</h2>
 
-              {/* Confirm Password Input */}
-              <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-xs lg:text-sm font-medium text-[#050404] mb-1 lg:mb-2"
-                >
-                  Confirm Password
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 lg:h-5 lg:w-5 text-[#d4d8dd]" />
-                  </div>
-                  <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    required
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    className="block w-full pl-9 lg:pl-10 pr-9 lg:pr-10 py-2 lg:py-3 border border-[#e2e8f0] rounded-lg focus:ring-2 focus:ring-[#04d5f2] focus:border-transparent transition-colors duration-300 text-sm lg:text-base"
-                    placeholder="Confirm your password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#d4d8dd] hover:text-[#04d5f2] transition-colors duration-300"
-                  >
-                    {showConfirmPassword ? (
-                      <EyeOff className="h-4 w-4 lg:h-5 lg:w-5" />
-                    ) : (
-                      <Eye className="h-4 w-4 lg:h-5 lg:w-5" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Terms and Conditions */}
-              <div className="flex items-center">
-                <input
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  className="h-3 w-3 lg:h-4 lg:w-4 text-[#04d5f2] focus:ring-[#04d5f2] border-[#e2e8f0] rounded"
-                  required
-                />
-                <label
-                  htmlFor="terms"
-                  className="ml-2 block text-xs lg:text-sm text-[#6b7280]"
-                >
-                  I agree to the{" "}
-                  <a
-                    href="#"
-                    className="text-[#04d5f2] hover:text-[#43ee17] transition-colors duration-300"
-                  >
-                    Terms and Conditions
-                  </a>
-                </label>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-[#04d5f2] to-[#43ee17] text-white py-3 px-4 rounded-lg font-semibold hover:shadow-lg transition-all transform hover:scale-[1.02] disabled:opacity-50 shadow-md"
-               >
-                {loading ? (
-                  <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-4 w-4 lg:h-5 lg:w-5 border-b-2 border-[#050404] mr-2"></div>
-                    Creating account...
-                  </div>
-                ) : (
-                  "Create Account"
-                )}
-              </button>
-            </form>
-
-            <div className="mt-4 lg:mt-6 text-center">
-              <p className="text-[#6b7280] text-xs lg:text-sm">
-                Already have an account?{" "}
-                <Link
-                  to="/login"
-                  className="text-[#04d5f2] hover:text-[#43ee17] font-medium transition-colors duration-300"
-                >
-                  Sign in here
-                </Link>
+              <p className="text-blue-100 mb-8 leading-relaxed">
+                Sign up to unlock personalized travel experiences around the
+                world. Discover hidden gems and create unforgettable memories.
               </p>
-            </div>
+
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/20">
+                  <Globe className="w-6 h-6 mx-auto mb-2" />
+                  <p className="text-xs">Global Destinations</p>
+                </div>
+                <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/20">
+                  <Compass className="w-6 h-6 mx-auto mb-2" />
+                  <p className="text-xs">Smart Planning</p>
+                </div>
+                <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/20">
+                  <Mountain className="w-6 h-6 mx-auto mb-2" />
+                  <p className="text-xs">Unique Experiences</p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center space-x-2 text-blue-100 text-sm">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span>Join our community of travelers</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
