@@ -1,15 +1,17 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
+import { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import { gsap } from "gsap";
 
 const TargetCursor = ({
   targetSelector = ".cursor-target",
   spinDuration = 2,
   hideDefaultCursor = true,
+  excludeSelector = "nav, .navbar, header",
 }) => {
   const cursorRef = useRef(null);
   const cornersRef = useRef(null);
   const spinTl = useRef(null);
   const dotRef = useRef(null);
+  const [isOverExcluded, setIsOverExcluded] = useState(false);
   const constants = useMemo(
     () => ({
       borderWidth: 3,
@@ -19,22 +21,27 @@ const TargetCursor = ({
     []
   );
 
-  const moveCursor = useCallback((x, y) => {
-    if (!cursorRef.current) return;
-    gsap.to(cursorRef.current, {
-      x,
-      y,
-      duration: 0.1,
-      ease: "power3.out",
-    });
-  }, []);
+  const moveCursor = useCallback(
+    (x, y) => {
+      if (!cursorRef.current || isOverExcluded) return;
+      gsap.to(cursorRef.current, {
+        x,
+        y,
+        duration: 0.1,
+        ease: "power3.out",
+      });
+    },
+    [isOverExcluded]
+  );
 
   useEffect(() => {
     if (!cursorRef.current) return;
 
     const originalCursor = document.body.style.cursor;
-    if (hideDefaultCursor) {
+    if (hideDefaultCursor && !isOverExcluded) {
       document.body.style.cursor = "none";
+    } else {
+      document.body.style.cursor = originalCursor;
     }
 
     const cursor = cursorRef.current;
@@ -75,13 +82,27 @@ const TargetCursor = ({
       });
     };
 
-    createSpinTimeline();
+    if (!isOverExcluded) {
+      createSpinTimeline();
+    }
 
-    const moveHandler = (e) => moveCursor(e.clientX, e.clientY);
+    const moveHandler = (e) => {
+      const excludedElement = document.querySelector(excludeSelector);
+      const isOverExcludedElement =
+        excludedElement &&
+        (e.target === excludedElement || e.target.closest(excludeSelector));
+
+      setIsOverExcluded(isOverExcludedElement);
+
+      if (!isOverExcludedElement) {
+        moveCursor(e.clientX, e.clientY);
+      }
+    };
+
     window.addEventListener("mousemove", moveHandler);
 
     const scrollHandler = () => {
-      if (!activeTarget || !cursorRef.current) return;
+      if (!activeTarget || !cursorRef.current || isOverExcluded) return;
 
       const mouseX = gsap.getProperty(cursorRef.current, "x");
       const mouseY = gsap.getProperty(cursorRef.current, "y");
@@ -101,19 +122,14 @@ const TargetCursor = ({
 
     window.addEventListener("scroll", scrollHandler, { passive: true });
 
-    //---------------------------------------------------------------
-    // This code for onclick animation
-
-    window.addEventListener("mousemove", moveHandler);
     const mouseDownHandler = () => {
-      if (!dotRef.current) return;
+      if (!dotRef.current || isOverExcluded) return;
       gsap.to(dotRef.current, { scale: 0.7, duration: 0.3 });
       gsap.to(cursorRef.current, { scale: 0.9, duration: 0.2 });
     };
 
-    // Animate it back to its original size
     const mouseUpHandler = () => {
-      if (!dotRef.current) return;
+      if (!dotRef.current || isOverExcluded) return;
       gsap.to(dotRef.current, { scale: 1, duration: 0.3 });
       gsap.to(cursorRef.current, { scale: 1, duration: 0.2 });
     };
@@ -121,8 +137,9 @@ const TargetCursor = ({
     window.addEventListener("mousedown", mouseDownHandler);
     window.addEventListener("mouseup", mouseUpHandler);
 
-    //----------------------------------------------------------------
     const enterHandler = (e) => {
+      if (isOverExcluded) return;
+
       const directTarget = e.target;
 
       const allTargets = [];
@@ -226,7 +243,7 @@ const TargetCursor = ({
 
       let moveThrottle = null;
       const targetMove = (ev) => {
-        if (moveThrottle || isAnimatingToTarget) return;
+        if (moveThrottle || isAnimatingToTarget || isOverExcluded) return;
         moveThrottle = requestAnimationFrame(() => {
           const mouseEvent = ev;
           updateCorners(mouseEvent.clientX, mouseEvent.clientY);
@@ -266,7 +283,12 @@ const TargetCursor = ({
         }
 
         resumeTimeout = setTimeout(() => {
-          if (!activeTarget && cursorRef.current && spinTl.current) {
+          if (
+            !activeTarget &&
+            cursorRef.current &&
+            spinTl.current &&
+            !isOverExcluded
+          ) {
             const currentRotation = gsap.getProperty(
               cursorRef.current,
               "rotation"
@@ -310,6 +332,8 @@ const TargetCursor = ({
       window.removeEventListener("mousemove", moveHandler);
       window.removeEventListener("mouseover", enterHandler);
       window.removeEventListener("scroll", scrollHandler);
+      window.removeEventListener("mousedown", mouseDownHandler);
+      window.removeEventListener("mouseup", mouseUpHandler);
 
       if (activeTarget) {
         cleanupTarget(activeTarget);
@@ -318,10 +342,18 @@ const TargetCursor = ({
       spinTl.current?.kill();
       document.body.style.cursor = originalCursor;
     };
-  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor]);
+  }, [
+    targetSelector,
+    spinDuration,
+    moveCursor,
+    constants,
+    hideDefaultCursor,
+    excludeSelector,
+    isOverExcluded,
+  ]);
 
   useEffect(() => {
-    if (!cursorRef.current || !spinTl.current) return;
+    if (!cursorRef.current || !spinTl.current || isOverExcluded) return;
 
     if (spinTl.current.isActive()) {
       spinTl.current.kill();
@@ -331,69 +363,62 @@ const TargetCursor = ({
         ease: "none",
       });
     }
-  }, [spinDuration]);
+  }, [spinDuration, isOverExcluded]);
 
   return (
-    <div
-      ref={cursorRef}
-      className="fixed top-0 left-0 w-0 h-0 pointer-events-none z-[9999] mix-blend-difference transform -translate-x-1/2 -translate-y-1/2"
-      style={{ willChange: "transform" }}
-    >
-      {/* Central dot with gradient */}
+    <>
       <div
-        ref={dotRef}
-        className="absolute left-1/2 top-1/2 w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-lg"
-        style={{ willChange: "transform" }}
-      />
+        ref={cursorRef}
+        className="fixed top-0 left-0 w-0 h-0 pointer-events-none z-[9999] transform -translate-x-1/2 -translate-y-1/2"
+        style={{
+          willChange: "transform",
+          display: isOverExcluded ? "none" : "block",
+        }}
+      >
+        <div
+          ref={dotRef}
+          className="absolute left-1/2 top-1/2 w-2 h-2 bg-gradient-to-r from-blue-700 via-purple-500 to-blue-500 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-lg"
+          style={{ willChange: "transform" }}
+        />
 
-      {/* Corner elements with gradient borders */}
-      <div
-        className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform -translate-x-[150%] -translate-y-[150%] border-r-0 border-b-0"
-        style={{
-          willChange: "transform",
-          background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)",
-          clipPath: "polygon(0 0, 100% 0, 0 100%)",
-        }}
-      />
-      <div
-        className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform translate-x-1/2 -translate-y-[150%] border-l-0 border-b-0"
-        style={{
-          willChange: "transform",
-          background: "linear-gradient(225deg, #3b82f6 0%, #8b5cf6 100%)",
-          clipPath: "polygon(0 0, 100% 0, 100% 100%)",
-        }}
-      />
-      <div
-        className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform translate-x-1/2 translate-y-1/2 border-l-0 border-t-0"
-        style={{
-          willChange: "transform",
-          background: "linear-gradient(315deg, #3b82f6 0%, #8b5cf6 100%)",
-          clipPath: "polygon(100% 0, 100% 100%, 0 100%)",
-        }}
-      />
-      <div
-        className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform -translate-x-[150%] translate-y-1/2 border-r-0 border-t-0"
-        style={{
-          willChange: "transform",
-          background: "linear-gradient(45deg, #3b82f6 0%, #8b5cf6 100%)",
-          clipPath: "polygon(0 0, 100% 100%, 0 100%)",
-        }}
-      />
-
-      {/* Outer ring with gradient */}
-      <div
-        className="absolute left-1/2 top-1/2 w-8 h-8 rounded-full border-2 border-transparent transform -translate-x-1/2 -translate-y-1/2"
-        style={{
-          willChange: "transform",
-          background: "linear-gradient(45deg, #3b82f6, #8b5cf6) border-box",
-          mask: "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-          maskComposite: "exclude",
-          WebkitMask:
-            "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "xor",
-        }}
-      />
-    </div>
+        <div
+          className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform -translate-x-[150%] -translate-y-[150%] border-r-0 border-b-0"
+          style={{
+            willChange: "transform",
+            background:
+              "linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #c4b5fd 100%)",
+            clipPath: "polygon(0 0, 100% 0, 0 100%)",
+          }}
+        />
+        <div
+          className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform translate-x-1/2 -translate-y-[150%] border-l-0 border-b-0"
+          style={{
+            willChange: "transform",
+            background:
+              "linear-gradient(225deg, #60a5fa 0%, #a78bfa 50%, #c4b5fd 100%)",
+            clipPath: "polygon(0 0, 100% 0, 100% 100%)",
+          }}
+        />
+        <div
+          className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform translate-x-1/2 translate-y-1/2 border-l-0 border-t-0"
+          style={{
+            willChange: "transform",
+            background:
+              "linear-gradient(315deg, #60a5fa 0%, #a78bfa 50%, #c4b5fd 100%)",
+            clipPath: "polygon(100% 0, 100% 100%, 0 100%)",
+          }}
+        />
+        <div
+          className="target-cursor-corner absolute left-1/2 top-1/2 w-3 h-3 transform -translate-x-[150%] translate-y-1/2 border-r-0 border-t-0"
+          style={{
+            willChange: "transform",
+            background:
+              "linear-gradient(45deg, #60a5fa 0%, #a78bfa 50%, #c4b5fd 100%)",
+            clipPath: "polygon(0 0, 100% 100%, 0 100%)",
+          }}
+        />
+      </div>
+    </>
   );
 };
 

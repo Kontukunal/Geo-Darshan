@@ -19,7 +19,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import TargetCursor from "../components/TargetCursor"; 
+import TargetCursor from "../components/TargetCursor";
 
 const Comparison = () => {
   const dispatch = useDispatch();
@@ -91,12 +91,12 @@ const Comparison = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Add the TargetCursor component */}
-      <TargetCursor 
-        targetSelector=".cursor-target" 
-        spinDuration={2} 
+      <TargetCursor
+        targetSelector=".cursor-target"
+        spinDuration={2}
         hideDefaultCursor={true}
       />
-      
+
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -149,7 +149,9 @@ const Comparison = () => {
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-shadow duration-300">
               {/* Header Row */}
               <div className="grid grid-cols-1 md:grid-cols-4 border-b border-gray-200">
-                <div className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 font-semibold text-gray-900 text-lg cursor-target"> {/* Add cursor-target class */}
+                <div className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 font-semibold text-gray-900 text-lg cursor-target">
+                  {" "}
+                  {/* Add cursor-target class */}
                   Comparison Metrics
                 </div>
                 {comparisonDestinations.map((dest) => (
@@ -169,10 +171,14 @@ const Comparison = () => {
                         alt={dest.name}
                         className="w-full h-48 object-cover rounded-2xl mb-4 shadow-md group-hover:shadow-lg transition-shadow duration-200 cursor-target" // Add cursor-target class
                       />
-                      <h3 className="font-bold text-xl text-gray-900 mb-2 group-hover:text-blue-700 transition-colors cursor-target"> {/* Add cursor-target class */}
+                      <h3 className="font-bold text-xl text-gray-900 mb-2 group-hover:text-blue-700 transition-colors cursor-target">
+                        {" "}
+                        {/* Add cursor-target class */}
                         {dest.name}
                       </h3>
-                      <p className="text-gray-600 text-sm flex items-center justify-center cursor-target"> {/* Add cursor-target class */}
+                      <p className="text-gray-600 text-sm flex items-center justify-center cursor-target">
+                        {" "}
+                        {/* Add cursor-target class */}
                         <MapPin className="w-4 h-4 mr-1" />
                         {dest.country}
                       </p>
@@ -187,7 +193,9 @@ const Comparison = () => {
                   key={metric.key}
                   className="grid grid-cols-1 md:grid-cols-4 border-b border-gray-200 group hover:bg-gray-50/50 transition-colors duration-200"
                 >
-                  <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 flex items-center space-x-3 cursor-target"> {/* Add cursor-target class */}
+                  <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 flex items-center space-x-3 cursor-target">
+                    {" "}
+                    {/* Add cursor-target class */}
                     <metric.icon className={`w-6 h-6 ${metric.color}`} />
                     <span className="font-semibold text-gray-900 text-lg">
                       {metric.label}
@@ -208,11 +216,18 @@ const Comparison = () => {
 
               {/* Description */}
               <div className="grid grid-cols-1 md:grid-cols-4 border-b border-gray-200 group hover:bg-gray-50/50 transition-colors duration-200">
-                <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 font-semibold text-gray-900 text-lg flex items-center cursor-target"> {/* Add cursor-target class */}
+                <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 font-semibold text-gray-900 text-lg flex items-center cursor-target">
+                  {" "}
+                  {/* Add cursor-target class */}
                   Description
                 </div>
                 {comparisonDestinations.map((dest) => (
-                  <div key={dest.id} className="p-6 border-l border-gray-200 cursor-target"> {/* Add cursor-target class */}
+                  <div
+                    key={dest.id}
+                    className="p-6 border-l border-gray-200 cursor-target"
+                  >
+                    {" "}
+                    {/* Add cursor-target class */}
                     <p className="text-gray-700 leading-relaxed line-clamp-4">
                       {dest.description}
                     </p>
@@ -222,7 +237,9 @@ const Comparison = () => {
 
               {/* Best Time to Visit */}
               <div className="grid grid-cols-1 md:grid-cols-4 border-b border-gray-200 group hover:bg-gray-50/50 transition-colors duration-200">
-                <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 flex items-center space-x-3 cursor-target"> {/* Add cursor-target class */}
+                <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 flex items-center space-x-3 cursor-target">
+                  {" "}
+                  {/* Add cursor-target class */}
                   <Clock className="w-6 h-6 text-blue-500" />
                   <span className="font-semibold text-gray-900 text-lg">
                     Best Time
@@ -242,11 +259,18 @@ const Comparison = () => {
 
               {/* Highlights */}
               <div className="grid grid-cols-1 md:grid-cols-4 border-b border-gray-200 group hover:bg-gray-50/50 transition-colors duration-200">
-                <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 font-semibold text-gray-900 text-lg flex items-center cursor-target"> {/* Add cursor-target class */}
+                <div className="p-6 bg-gradient-to-r from-blue-50/50 to-purple-50/50 font-semibold text-gray-900 text-lg flex items-center cursor-target">
+                  {" "}
+                  {/* Add cursor-target class */}
                   Highlights
                 </div>
                 {comparisonDestinations.map((dest) => (
-                  <div key={dest.id} className="p-6 border-l border-gray-200 cursor-target"> {/* Add cursor-target class */}
+                  <div
+                    key={dest.id}
+                    className="p-6 border-l border-gray-200 cursor-target"
+                  >
+                    {" "}
+                    {/* Add cursor-target class */}
                     <div className="flex flex-wrap gap-2 justify-center">
                       {dest.tags.slice(0, 4).map((tag) => (
                         <span
