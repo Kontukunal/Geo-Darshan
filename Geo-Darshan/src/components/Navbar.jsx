@@ -45,7 +45,7 @@ const Navbar = () => {
           icon: SlidersHorizontal,
         },
       ],
-      bgColor: "#e0f2fe",
+      bgColor: "#bde0fe",
       textColor: "#0c4a6e",
     },
     {
@@ -64,7 +64,7 @@ const Navbar = () => {
           icon: Calendar,
         },
       ],
-      bgColor: "#eef2ff",
+      bgColor: "#e4d9ff",
       textColor: "#312e81",
     },
     {
@@ -83,7 +83,7 @@ const Navbar = () => {
           icon: TrendingUp,
         },
       ],
-      bgColor: "#f0fdf4",
+      bgColor: "#c7f9cc",
       textColor: "#14532d",
     },
   ];

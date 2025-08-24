@@ -32,7 +32,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Link, useNavigate } from "react-router-dom";
 
-// Custom marker icons with different colors
 const createCustomIcon = (color, emoji) => {
   return L.divIcon({
     html: `
@@ -71,16 +70,15 @@ const createCustomIcon = (color, emoji) => {
   });
 };
 
-// Color and emoji combinations for markers
 const markerStyles = [
-  { color: "#3B82F6", emoji: "🏖️" }, // Beach - Blue
-  { color: "#10B981", emoji: "🏔️" }, // Mountain - Green
-  { color: "#F59E0B", emoji: "🏛️" }, // Cultural - Amber
-  { color: "#EF4444", emoji: "🌋" }, // Adventure - Red
-  { color: "#8B5CF6", emoji: "🌃" }, // City - Purple
-  { color: "#EC4899", emoji: "🏝️" }, // Island - Pink
-  { color: "#14B8A6", emoji: "🏜️" }, // Desert - Teal
-  { color: "#F97316", emoji: "❄️" }, // Snow - Orange
+  { color: "#3B82F6", emoji: "🏖️" },
+  { color: "#10B981", emoji: "🏔️" },
+  { color: "#F59E0B", emoji: "🏛️" },
+  { color: "#EF4444", emoji: "🌋" },
+  { color: "#8B5CF6", emoji: "🌃" },
+  { color: "#EC4899", emoji: "🏝️" },
+  { color: "#14B8A6", emoji: "🏜️" },
+  { color: "#F97316", emoji: "❄️" },
 ];
 
 L.Icon.Default.mergeOptions({
@@ -610,7 +608,6 @@ Please remove one from your comparison list first.`);
           </div>
         )}
 
-        {/* Enhanced Map Section */}
         <div className="mt-12 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-xl overflow-hidden border border-cyan-200 p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
             <div>
@@ -637,13 +634,11 @@ Please remove one from your comparison list first.`);
               boxShadow: "0 10px 25px -5px rgba(6, 182, 212, 0.2)",
             }}
           >
-            {/* Cool blue-themed map tiles */}
             <TileLayer
               url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
             />
 
-            {/* Water color enhancement */}
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
@@ -660,7 +655,6 @@ Please remove one from your comparison list first.`);
                 >
                   <Popup className="custom-popup rounded-xl border-0 shadow-2xl">
                     <div className="w-80 p-0 overflow-hidden">
-                      {/* Popup Image */}
                       <div className="relative">
                         <img
                           src={dest.image}
@@ -679,7 +673,6 @@ Please remove one from your comparison list first.`);
                         </div>
                       </div>
 
-                      {/* Popup Content */}
                       <div className="p-4">
                         <div className="flex items-start justify-between mb-3">
                           <div>

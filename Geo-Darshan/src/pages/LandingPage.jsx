@@ -54,7 +54,6 @@ const useResizeObserver = (callback, elements, dependencies) => {
     return () => {
       observers.forEach((observer) => observer?.disconnect());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 };
 
@@ -91,7 +90,6 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
         img.removeEventListener("error", handleImageLoad);
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 };
 
@@ -456,7 +454,6 @@ const LandingPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Top 15 countries flags data (including India)
   const topCountriesFlags = [
     { src: "https://flagcdn.com/w320/in.png", alt: "India", title: "India" },
     {
@@ -495,7 +492,6 @@ const LandingPage = () => {
     { src: "https://flagcdn.com/w320/mx.png", alt: "Mexico", title: "Mexico" },
   ];
 
-  // Navigation links for unauthenticated users
   const navLinks = [
     {
       label: "Explore",
@@ -513,7 +509,7 @@ const LandingPage = () => {
           icon: SlidersHorizontal,
         },
       ],
-      bgColor: "#e0f2fe",
+      bgColor: "#bde0fe",
       textColor: "#0c4a6e",
     },
     {
@@ -532,7 +528,7 @@ const LandingPage = () => {
           icon: Calendar,
         },
       ],
-      bgColor: "#eef2ff",
+      bgColor: "#e4d9ff",
       textColor: "#312e81",
     },
     {
@@ -551,7 +547,7 @@ const LandingPage = () => {
           icon: TrendingUp,
         },
       ],
-      bgColor: "#f0fdf4",
+      bgColor: "#c7f9cc",
       textColor: "#14532d",
     },
   ];
