@@ -15,6 +15,7 @@
     "firebase": "^11.10.0",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
+    "html2canvas": "^1.4.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.514.0",
     "react": "^19.1.1",
