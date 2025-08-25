@@ -48,7 +48,6 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-pink-50 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl flex flex-col lg:flex-row rounded-3xl overflow-hidden shadow-2xl bg-white">
-        {/* Left side - Form */}
         <div className="w-full lg:w-1/2 flex items-center justify-center p-8 md:p-12 lg:p-16">
           <div className="w-full max-w-md space-y-8">
             <motion.div
@@ -96,7 +95,6 @@ const Login = () => {
                   </motion.div>
                 )}
 
-                {/* Email Input */}
                 <motion.div
                   className="space-y-2"
                   initial={{ opacity: 0 }}
@@ -126,7 +124,6 @@ const Login = () => {
                   </div>
                 </motion.div>
 
-                {/* Password Input */}
                 <motion.div
                   className="space-y-2"
                   initial={{ opacity: 0 }}
@@ -167,7 +164,6 @@ const Login = () => {
                   </div>
                 </motion.div>
 
-                {/* Remember me and Forgot password */}
                 <motion.div
                   className="flex items-center justify-between"
                   initial={{ opacity: 0 }}
@@ -197,7 +193,6 @@ const Login = () => {
                   </Link>
                 </motion.div>
 
-                {/* Login Button */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -259,7 +254,6 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Right side - Image & Content */}
         <div className="hidden lg:block w-1/2 relative bg-gradient-to-br from-blue-600 to-purple-600">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl opacity-20"></div>

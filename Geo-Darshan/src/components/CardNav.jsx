@@ -211,7 +211,7 @@ const CardNav = ({
                           className="nav-card-link-icon"
                           aria-hidden="true"
                         />
-                      )}
+                      )} 
                       <span>{lnk.label}</span>
                       <ArrowUpRight
                         className="nav-card-link-arrow"

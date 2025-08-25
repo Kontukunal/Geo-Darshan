@@ -27,11 +27,9 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-// Local storage keys
 const FAVORITES_STORAGE_KEY = "destinationFavoritesList";
 const COMPARE_STORAGE_KEY = "destinationComparisonList";
 
-// Helper functions for localStorage
 const getStoredFavoritesList = () => {
   try {
     const stored = localStorage.getItem(FAVORITES_STORAGE_KEY);
@@ -85,7 +83,6 @@ const DestinationDetails = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // Close share options when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (shareRef.current && !shareRef.current.contains(event.target)) {
@@ -276,8 +273,6 @@ Please remove one from your comparison list first.`);
           <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
           <span>Back to Recommendations</span>
         </Link>
-
-        {/* Hero Section */}
         <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-8 group cursor-pointer">
           <div className="relative overflow-hidden">
             <img
@@ -286,7 +281,6 @@ Please remove one from your comparison list first.`);
               className="w-full h-64 md:h-96 object-cover rounded-2xl transition-all duration-1000 group-hover:scale-105"
             />
 
-            {/* Floating info badges */}
             <div className="absolute top-6 left-6 flex items-center space-x-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 text-white">
               <TrendingUp className="w-4 h-4" />
               <span className="text-sm font-medium">TRENDING DESTINATION</span>
@@ -354,7 +348,6 @@ Please remove one from your comparison list first.`);
                       <Share className="w-6 h-6" />
                     </button>
 
-                    {/* Share Options Dropdown */}
                     {showShareOptions && (
                       <div className="absolute right-0 bottom-full mb-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-10">
                         <div className="p-3 border-b border-gray-100">
@@ -409,40 +402,36 @@ Please remove one from your comparison list first.`);
             </div>
           </div>
         </div>
-
-        {/* Info Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <InfoCard
             icon={<Calendar className="w-8 h-8" />}
             label="Best Time to Visit"
             value={destination.bestTimeToVisit}
             color="text-blue-600"
-            bgColor="bg-blue-50"
+            bgColor="bg-blue-100"
           />
           <InfoCard
             icon={<DollarSign className="w-8 h-8" />}
             label="Budget Range"
             value={destination.price}
             color="text-green-600"
-            bgColor="bg-green-50"
+            bgColor="bg-green-100"
           />
           <InfoCard
             icon={<Star className="w-8 h-8" />}
             label="Rating"
             value={`${destination.rating}/5`}
             color="text-amber-600"
-            bgColor="bg-amber-50"
+            bgColor="bg-amber-100"
           />
           <InfoCard
             icon={<Users className="w-8 h-8" />}
             label="Total Reviews"
             value={destination.reviewCount.toLocaleString()}
             color="text-purple-600"
-            bgColor="bg-purple-50"
+            bgColor="bg-purple-100"
           />
         </div>
-
-        {/* Add to Itinerary Button */}
         <div className="flex justify-center mb-8">
           <button
             onClick={handleAddToItinerary}
@@ -459,8 +448,6 @@ Please remove one from your comparison list first.`);
             {!isInItinerary && <ChevronRight className="w-5 h-5" />}
           </button>
         </div>
-
-        {/* Tabs Navigation */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 mb-8 overflow-hidden">
           <div className="flex flex-col sm:flex-row space-y-0 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
             {tabs.map((tab) => {
@@ -471,7 +458,7 @@ Please remove one from your comparison list first.`);
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 py-5 px-6 font-medium transition-all duration-300 flex items-center justify-center space-x-3 ${
                     activeTab === tab.id
-                      ? "bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700"
+                      ? "bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700"
                       : "text-gray-600 hover:text-blue-600 hover:bg-gray-50"
                   }`}
                 >
@@ -482,8 +469,6 @@ Please remove one from your comparison list first.`);
             })}
           </div>
         </div>
-
-        {/* Tab Content */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8">
           {activeTab === "overview" && (
             <div className="space-y-8">
@@ -634,8 +619,7 @@ Please remove one from your comparison list first.`);
             </div>
           )}
         </div>
-
-        {/* Related Destinations */}
+        ={" "}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             You Might Also Like

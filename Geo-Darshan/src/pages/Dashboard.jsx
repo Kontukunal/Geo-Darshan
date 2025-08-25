@@ -10,7 +10,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Star, MapPin, Heart, Navigation, Palette } from "lucide-react";
 
-// Custom marker icons with different colors
 const createCustomIcon = (color, emoji) => {
   return L.divIcon({
     html: `
@@ -101,7 +100,6 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-pink-50">
       <Navbar />
 
-      {/* Hero Image at the top */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
           <img
@@ -112,7 +110,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Hero Text Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 md:pb-14">
           <div className="text-center">
@@ -154,7 +151,6 @@ const Dashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
-        {/* Destinations Slider */}
         <section className="relative">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3">
@@ -237,7 +233,6 @@ const Dashboard = () => {
                   >
                     <Popup className="custom-popup rounded-xl border-0 shadow-2xl">
                       <div className="w-80 p-0 overflow-hidden">
-                        {/* Popup Image */}
                         <div className="relative">
                           <img
                             src={dest.image}
@@ -256,7 +251,6 @@ const Dashboard = () => {
                           </div>
                         </div>
 
-                        {/* Popup Content */}
                         <div className="p-4">
                           <div className="flex items-start justify-between mb-3">
                             <div>

@@ -6,7 +6,7 @@ export const destinations = [
     description:
       "The romantic capital of France, known for its art, fashion, gastronomy, and culture, with iconic landmarks like the Eiffel Tower.",
     image:
-      "https://images.pexels.com/photos/338515/pexels-photo-338515.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/29667766/pexels-photo-29667766.jpeg",
     rating: 4.9,
     reviewCount: 5213,
     price: "$$$",
@@ -26,8 +26,7 @@ export const destinations = [
     country: "Italy",
     description:
       "The Eternal City with a history spanning over two millennia, featuring ancient ruins, Renaissance art, and vibrant street life.",
-    image:
-      "https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1797161/pexels-photo-1797161.jpeg",
     rating: 4.8,
     reviewCount: 4789,
     price: "$$",
@@ -42,8 +41,7 @@ export const destinations = [
     country: "USA",
     description:
       "The bustling metropolis known for its iconic skyline, Broadway shows, world-class museums, and diverse neighborhoods.",
-    image:
-      "https://images.pexels.com/photos/2190283/pexels-photo-2190283.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/378570/pexels-photo-378570.jpeg",
     rating: 4.7,
     reviewCount: 6321,
     price: "$$$$",
@@ -63,8 +61,7 @@ export const destinations = [
     country: "United Kingdom",
     description:
       "Historic capital featuring royal palaces, world-class museums, and iconic landmarks like Big Ben and the Tower Bridge.",
-    image:
-      "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1427579/pexels-photo-1427579.jpeg",
     rating: 4.8,
     reviewCount: 4987,
     price: "$$$",
@@ -85,7 +82,7 @@ export const destinations = [
     description:
       "Ultra-modern city in the desert known for luxury shopping, futuristic architecture, and lively nightlife.",
     image:
-      "https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/29555577/pexels-photo-29555577.jpeg",
     rating: 4.7,
     reviewCount: 4125,
     price: "$$$$",
@@ -105,8 +102,7 @@ export const destinations = [
     country: "Japan",
     description:
       "Vibrant metropolis blending ultramodern and traditional, from neon-lit skyscrapers to historic temples.",
-    image:
-      "https://images.pexels.com/photos/2190283/pexels-photo-2190283.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/7526819/pexels-photo-7526819.jpeg",
     rating: 4.9,
     reviewCount: 5236,
     price: "$$$",
@@ -126,8 +122,7 @@ export const destinations = [
     country: "Australia",
     description:
       "Stunning harbor city known for its iconic opera house, beautiful beaches, and vibrant cultural scene.",
-    image:
-      "https://images.pexels.com/photos/719399/pexels-photo-719399.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/783682/pexels-photo-783682.jpeg",
     rating: 4.8,
     reviewCount: 3874,
     price: "$$$",
@@ -148,7 +143,7 @@ export const destinations = [
     description:
       "Ancient Incan citadel set high in the Andes Mountains, renowned for its sophisticated dry-stone walls.",
     image:
-      "https://images.pexels.com/photos/3573382/pexels-photo-3573382.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/20464561/pexels-photo-20464561.jpeg",
     rating: 4.9,
     reviewCount: 2987,
     price: "$$",
@@ -168,8 +163,7 @@ export const destinations = [
     country: "Italy",
     description:
       "Floating city built on water, famous for its canals, Gothic architecture, and romantic atmosphere.",
-    image:
-      "https://images.pexels.com/photos/774321/pexels-photo-774321.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1580252/pexels-photo-1580252.jpeg",
     rating: 4.7,
     reviewCount: 3654,
     price: "$$$",
@@ -190,7 +184,7 @@ export const destinations = [
     description:
       "Vibrant coastal city known for its Copacabana beach, Christ the Redeemer statue, and annual Carnival festival.",
     image:
-      "https://images.pexels.com/photos/161778/sugar-loaf-mountain-rio-de-janeiro-brazil-monument-161778.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/13911606/pexels-photo-13911606.jpeg",
     rating: 4.6,
     reviewCount: 3125,
     price: "$$",
@@ -211,7 +205,7 @@ export const destinations = [
     description:
       "Massive geological wonder featuring layered bands of red rock revealing millions of years of geological history.",
     image:
-      "https://images.pexels.com/photos/975241/pexels-photo-975241.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/17390198/pexels-photo-17390198.jpeg",
     rating: 4.9,
     reviewCount: 2876,
     price: "$$",
@@ -226,8 +220,7 @@ export const destinations = [
     country: "Switzerland",
     description:
       "Majestic mountain range offering breathtaking scenery, world-class skiing, and charming alpine villages.",
-    image:
-      "https://images.pexels.com/photos/2064827/pexels-photo-2064827.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/4159867/pexels-photo-4159867.jpeg",
     rating: 4.9,
     reviewCount: 2456,
     price: "$$$$",
@@ -243,7 +236,7 @@ export const destinations = [
     description:
       "Vast temple complex and one of the most important archaeological sites in Southeast Asia.",
     image:
-      "https://images.pexels.com/photos/1457812/pexels-photo-1457812.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/15928805/pexels-photo-15928805.jpeg",
     rating: 4.8,
     reviewCount: 1987,
     price: "$",
@@ -258,8 +251,7 @@ export const destinations = [
     country: "Greece",
     description:
       "Stunning volcanic island known for its whitewashed buildings, blue domes, and spectacular sunsets.",
-    image:
-      "https://images.pexels.com/photos/1028225/pexels-photo-1028225.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1285625/pexels-photo-1285625.jpeg",
     rating: 4.8,
     reviewCount: 3542,
     price: "$$$",
@@ -274,8 +266,7 @@ export const destinations = [
     country: "Tanzania",
     description:
       "Famous wildlife sanctuary known for the annual migration of over 1.5 million wildebeest and hundreds of thousands of zebras.",
-    image:
-      "https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/6995551/pexels-photo-6995551.jpeg",
     rating: 4.9,
     reviewCount: 1876,
     price: "$$$$",
@@ -296,7 +287,7 @@ export const destinations = [
     description:
       "Vibrant city known for Gaudí's architectural masterpieces, beautiful beaches, and lively cultural scene.",
     image:
-      "https://images.pexels.com/photos/1388030/pexels-photo-1388030.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/15673211/pexels-photo-15673211.jpeg",
     rating: 4.7,
     reviewCount: 4321,
     price: "$$",
@@ -317,7 +308,7 @@ export const destinations = [
     description:
       "Historic city straddling Europe and Asia, known for its Byzantine and Ottoman architecture and vibrant bazaars.",
     image:
-      "https://images.pexels.com/photos/2087391/pexels-photo-2087391.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/28167639/pexels-photo-28167639.jpeg",
     rating: 4.8,
     reviewCount: 3678,
     price: "$$",
@@ -338,7 +329,7 @@ export const destinations = [
     description:
       "Ancient capital known for its classical Buddhist temples, gardens, imperial palaces, and traditional wooden houses.",
     image:
-      "https://images.pexels.com/photos/402028/pexels-photo-402028.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/161401/fushimi-inari-taisha-shrine-kyoto-japan-temple-161401.jpeg",
     rating: 4.9,
     reviewCount: 4123,
     price: "$$",
@@ -358,8 +349,7 @@ export const destinations = [
     country: "Maldives",
     description:
       "Tropical paradise in the Indian Ocean known for its crystal-clear waters, overwater bungalows, and coral reefs.",
-    image:
-      "https://images.pexels.com/photos/3250613/pexels-photo-3250613.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/3601422/pexels-photo-3601422.jpeg",
     rating: 4.9,
     reviewCount: 2876,
     price: "$$$$",
@@ -374,8 +364,7 @@ export const destinations = [
     country: "Indonesia",
     description:
       "Tropical island known for its volcanic mountains, iconic rice paddies, beaches, and coral reefs.",
-    image:
-      "https://images.pexels.com/photos/36717/underwater-ocean-sea-blue.jpg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg",
     rating: 4.7,
     reviewCount: 5234,
     price: "$",
@@ -396,7 +385,7 @@ export const destinations = [
     description:
       "Sprawling capital home to ancient monuments including the Pyramids of Giza and the Egyptian Museum.",
     image:
-      "https://images.pexels.com/photos/71241/pexels-photo-71241.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/13865652/pexels-photo-13865652.jpeg",
     rating: 4.6,
     reviewCount: 2987,
     price: "$$",
@@ -416,8 +405,7 @@ export const destinations = [
     country: "Czech Republic",
     description:
       "City of a hundred spires known for its Old Town Square, colorful baroque buildings, and medieval Astronomical Clock.",
-    image:
-      "https://images.pexels.com/photos/1111597/pexels-photo-1111597.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/442583/pexels-photo-442583.jpeg",
     rating: 4.8,
     reviewCount: 3456,
     price: "$$",
@@ -438,7 +426,7 @@ export const destinations = [
     description:
       "Capital known for its artistic heritage, elaborate canal system, and narrow houses with gabled facades.",
     image:
-      "https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/16268107/pexels-photo-16268107.jpeg",
     rating: 4.7,
     reviewCount: 3987,
     price: "$$$",
@@ -458,8 +446,7 @@ export const destinations = [
     country: "China",
     description:
       "Vibrant financial hub with a spectacular skyline, bustling markets, and lush mountainous parks.",
-    image:
-      "https://images.pexels.com/photos/1787235/pexels-photo-1787235.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/2537536/pexels-photo-2537536.jpeg",
     rating: 4.7,
     reviewCount: 4123,
     price: "$$$",
@@ -479,8 +466,7 @@ export const destinations = [
     country: "Canada",
     description:
       "Bustling west coast seaport with dramatic natural surroundings including mountains, forests, and beaches.",
-    image:
-      "https://images.pexels.com/photos/2087391/pexels-photo-2087391.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/2382868/pexels-photo-2382868.jpeg",
     rating: 4.8,
     reviewCount: 2876,
     price: "$$$",
@@ -500,8 +486,7 @@ export const destinations = [
     country: "South Africa",
     description:
       "Port city on South Africa's southwest coast with dramatic natural landmarks including Table Mountain.",
-    image:
-      "https://images.pexels.com/photos/2087391/pexels-photo-2087391.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/259447/pexels-photo-259447.jpeg",
     rating: 4.8,
     reviewCount: 3123,
     price: "$$",
@@ -521,8 +506,7 @@ export const destinations = [
     country: "South Korea",
     description:
       "Modern metropolis where futuristic digital technology meets ancient Buddhist temples and palaces.",
-    image:
-      "https://images.pexels.com/photos/237211/pexels-photo-237211.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/6435219/pexels-photo-6435219.jpeg",
     rating: 4.7,
     reviewCount: 3456,
     price: "$$",
@@ -543,7 +527,7 @@ export const destinations = [
     description:
       "Global financial center with tropical climate, multicultural population, and spectacular modern architecture.",
     image:
-      "https://images.pexels.com/photos/774321/pexels-photo-774321.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/15314298/pexels-photo-15314298.jpeg",
     rating: 4.8,
     reviewCount: 4321,
     price: "$$$$",
@@ -564,7 +548,7 @@ export const destinations = [
     description:
       "Capital known for its art scene, modern landmarks, and WWII history including the Holocaust Memorial.",
     image:
-      "https://images.pexels.com/photos/196047/pexels-photo-196047.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/18576930/pexels-photo-18576930.jpeg",
     rating: 4.6,
     reviewCount: 2987,
     price: "$$",
@@ -584,8 +568,7 @@ export const destinations = [
     country: "Portugal",
     description:
       "Picturesque capital built on seven hills, known for its colorful architecture, historic tram system, and Fado music.",
-    image:
-      "https://images.pexels.com/photos/1638072/pexels-photo-1638072.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/1540247/pexels-photo-1540247.jpeg",
     rating: 4.7,
     reviewCount: 2765,
     price: "$$",

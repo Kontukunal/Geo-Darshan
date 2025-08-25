@@ -64,7 +64,6 @@ const Stepper = ({
           boxShadow: "0 10px 40px rgba(0, 0, 0, 0.08)",
         }}
       >
-        {/* Step indicators - Horizontal layout */}
         <div
           className={`${stepContainerClassName} flex w-full items-center justify-center px-8 pt-8`}
         >
@@ -101,7 +100,6 @@ const Stepper = ({
           })}
         </div>
 
-        {/* Step content */}
         <StepContentWrapper
           isCompleted={isCompleted}
           currentStep={currentStep}
@@ -111,7 +109,6 @@ const Stepper = ({
           {stepsArray[currentStep - 1]}
         </StepContentWrapper>
 
-        {/* Navigation buttons */}
         {!isCompleted && (
           <div className={`px-8 pb-8 ${footerClassName}`}>
             <div
@@ -313,7 +310,6 @@ function StepIndicator({
           )}
         </motion.div>
 
-        {/* Step label */}
         <motion.span
           className="mt-2 text-xs font-medium text-gray-600 capitalize"
           animate={{

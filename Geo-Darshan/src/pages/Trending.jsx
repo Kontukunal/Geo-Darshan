@@ -111,7 +111,6 @@ const DestinationCard = ({
         }}
       />
 
-      {/* Ranking Badge - Top Center Position */}
       {rank && (
         <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-20 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold px-4 py-2 rounded-full flex items-center space-x-2 shadow-lg shadow-purple-500/30">
           <TrendingUp className="w-4 h-4" />
@@ -166,7 +165,6 @@ const DestinationCard = ({
         </div>
       </div>
 
-      {/* Heart Icon */}
       <div className="absolute top-6 left-6 z-20 group-hover:scale-110 transition-transform">
         <button
           onClick={handleFavoriteClick}
@@ -212,7 +210,6 @@ const Trending = () => {
     const trendingDests = getTrendingDestinations(3);
     dispatch(setTrending(trendingDests));
 
-    // Load favorites from Firebase
     const loadFavorites = async () => {
       const user = auth.currentUser;
       if (user) {
