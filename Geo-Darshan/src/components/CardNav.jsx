@@ -179,7 +179,11 @@ const CardNav = ({
                 ? { backgroundColor: "transparent", color: "white" }
                 : {}),
             }}
-            onClick={onButtonClick}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (onButtonClick) onButtonClick(e);
+            }}
           >
             {isLogoutButton && <LogOut className="w-4 h-4" />}
             {buttonLabel}
@@ -211,7 +215,7 @@ const CardNav = ({
                           className="nav-card-link-icon"
                           aria-hidden="true"
                         />
-                      )} 
+                      )}
                       <span>{lnk.label}</span>
                       <ArrowUpRight
                         className="nav-card-link-arrow"
