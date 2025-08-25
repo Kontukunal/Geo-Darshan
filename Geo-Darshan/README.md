@@ -1,12 +1,58 @@
-# React + Vite
+# Geo Darshan: Personalized Destination Recommendation Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ✈️ Introduction
 
-Currently, two official plugins are available:
+Geo Darshan is a personalized travel recommendation platform that helps users discover ideal destinations based on preferences like interests, budget, travel style, and more. With the plethora of travel destinations available, choosing the right place can be overwhelming. Our platform simplifies this by providing tailored suggestions, enhancing travel planning and discovery.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Travel smarter and better with Geo Darshan!** ✈️🧳🌏
 
-## Expanding the ESLint configuration
+## 🚀 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Frontend Live Demo:** 👉 https://geodarshan-bykunal.netlify.app
+
+## 🖼️ UI
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+
+## ✨ Core Features
+
+- **🔐 User Authentication** - Secure login/registration with Firebase Auth
+- **🧠 Smart Recommendations** - Based on interests, budget & activities
+- **🗺️ Interactive Map View** - Explore destinations using Leaflet
+- **⭐ Favorites Management** - Save favorite destinations per user
+- **📌 Itinerary Builder** - Plan and manage your travel schedule
+
+## 🚀 Unique Features
+
+- **➕ Compare Destinations** - Side-by-side comparison of up to 3 destinations
+- **🔥 Trending Destinations** - Discover popular spots based on user activity
+
+## 🎨 Additional Features
+
+- **🔍 Search, Filters & Pagination**
+- **💬 User Reviews Section**
+- **📱 Fully Responsive Design** - Works on desktop, tablet & mobile
+
+## 🧪 Technology Stack
+
+**Frontend:**
+
+- React.js (with Vite)
+- React Router for navigation
+- Redux Toolkit for state management
+
+**Database:**
+
+- Firebase Authentication
+- Firebase Firestore
+
+**Maps:**
+
+- Leaflet

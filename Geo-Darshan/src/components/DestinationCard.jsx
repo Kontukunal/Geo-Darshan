@@ -166,7 +166,7 @@ const DestinationCard = ({
             </div>
           </div>
 
-=          <div className="flex items-center mb-4">
+          <div className="flex items-center mb-4">
             <div className="flex items-center text-gray-500 bg-slate-100 px-3 py-1.5 rounded-full">
               <Star className="w-4 h-4 mr-1 text-amber-500 fill-current" />
               <span className="text-xs font-medium">
