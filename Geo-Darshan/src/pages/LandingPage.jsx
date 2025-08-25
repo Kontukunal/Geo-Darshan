@@ -21,7 +21,6 @@ import { destinations } from "../data/destinations";
 import DestinationCard from "../components/DestinationCard";
 import CardNav from "../components/CardNav";
 
-// LogoLoop Component
 const ANIMATION_CONFIG = {
   SMOOTH_TAU: 0.25,
   MIN_COPIES: 2,
@@ -411,7 +410,6 @@ export const LogoLoop = memo(
 
 LogoLoop.displayName = "LogoLoop";
 
-// Custom animations
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
@@ -564,7 +562,6 @@ const LandingPage = () => {
         />
       </div>
 
-      {/* Hero Image at the top */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
           <img
@@ -575,7 +572,6 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Hero Text Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 md:pb-14">
           <div className="text-center">
@@ -627,7 +623,6 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Top Countries Flags Logo Loop Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -658,7 +653,6 @@ const LandingPage = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
-        {/* Features Section - Redesigned */}
         <section className="relative">
           <div className="text-center mb-12">
             <motion.h2
@@ -742,7 +736,6 @@ const LandingPage = () => {
           </motion.div>
         </section>
 
-        {/* Testimonials Section - Redesigned */}
         <section className="py-16 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl shadow-inner">
           <div className="container mx-auto px-6">
             <motion.h3
@@ -836,7 +829,6 @@ const LandingPage = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl">
           <div className="container mx-auto px-6 text-center">
             <motion.div
