@@ -8,7 +8,8 @@ Geo Darshan is a personalized travel recommendation platform that helps users di
 
 ## 🚀 Live Demo
 
-**Frontend Live Demo:** 👉 https://geodarshan-bykunal.netlify.app
+**Frontend Live Demo:** 👉 https://geodarshan-bykunal.netlify.app  
+**Video Demo:** 👉 https://youtu.be/hOJivoHMQoc
 
 ## 🖼️ UI
 
